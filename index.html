@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vijay Kumar | CSE Portfolio</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Outfit"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2563eb',
+                        darkBg: '#0b0f19',
+                        cardDark: '#111827'
+                    },
+                    animation: {
+                        'float': 'float 4.5s cubic-bezier(0.37, 0, 0.63, 1) infinite',
+                        'blob': 'blob 8s ease-in-out infinite',
+                        'cursor': 'cursor .8s step-end infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(28px, -42px) scale(1.08)' },
+                            '66%': { transform: 'translate(-18px, 18px) scale(0.94)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        cursor: {
+                            '0%, 100%': { borderColor: 'transparent' },
+                            '50%': { borderColor: '#2563eb' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+     
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-darkBg dark:text-slate-100 transition-colors duration-300 font-sans relative overflow-x-hidden">
+
+    <!-- Top Scroll Progress Bar -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-600 via-cyan-400 to-indigo-600 z-[60] transition-all duration-150" style="width: 0%;"></div>
+
+    <!-- Copy Toast Notification -->
+    <div id="copy-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[80] hidden px-4 py-2.5 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 text-xs font-bold shadow-2xl items-center gap-2">
+        <i class="fas fa-check-circle text-emerald-400 dark:text-emerald-600"></i>
+        <span id="copy-toast-text">Copied to clipboard!</span>
+    </div>
+
+    <!-- Animated Background Blobs -->
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 dark:bg-blue-600/15 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl animate-blob"></div>
+        <div class="absolute top-40 right-10 w-72 h-72 bg-cyan-400/20 dark:bg-cyan-500/15 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-1/3 w-72 h-72 bg-indigo-400/20 dark:bg-indigo-600/15 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Navbar with Mobile Hamburger Menu -->
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-darkBg/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 transition-all">
+        <div id="nav-inner" class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center transition-all duration-300">
+            <a href="#" class="font-display text-xl font-extrabold tracking-tight text-primary hover:scale-105 transition-transform">
+                &lt;Vijay /&gt;
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex space-x-8 font-semibold text-sm">
+                <a href="#about" class="relative group py-1 hover:text-primary transition">
+                    About
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#skills" class="relative group py-1 hover:text-primary transition">
+                    Skills
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#projects" class="relative group py-1 hover:text-primary transition">
+                    Projects
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#contact" class="relative group py-1 hover:text-primary transition">
+                    Contact
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </div>
+
+            <!-- Right Controls: Theme Toggle + Mobile Menu Button -->
+            <div class="flex items-center gap-2">
+                <button id="theme-toggle" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-yellow-400 transition transform active:scale-90" title="Switch Theme">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:inline"></i>
+                </button>
+
+                <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition" aria-label="Toggle Menu">
+                    <i class="fas fa-bars text-base" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-darkBg border-b border-slate-200 dark:border-slate-800 px-6 py-4 space-y-3 font-semibold text-sm">
+            <a href="#about" class="mobile-link block py-2 hover:text-primary transition">About</a>
+            <a href="#skills" class="mobile-link block py-2 hover:text-primary transition">Skills</a>
+            <a href="#projects" class="mobile-link block py-2 hover:text-primary transition">Projects</a>
+            <a href="#contact" class="mobile-link block py-2 hover:text-primary transition">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6 max-w-6xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-12">
+        <div class="md:w-3/5 space-y-5 text-center md:text-left" data-aos="fade-up" data-aos-duration="850">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold bg-blue-100/80 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 rounded-full border border-blue-200 dark:border-blue-800">
+                <span class="w-2 h-2 rounded-full bg-blue-600 animate-ping"></span>
+                B.Tech CSE Student • VFSTR
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+                Hi, I'm <span class="animate-gradient-text">Vijay Kumar</span>.<br>
+                <span class="text-2xl md:text-4xl text-slate-700 dark:text-slate-200 font-semibold">
+                    I am a <span id="typing-text" class="text-primary border-r-2 border-primary pr-1 animate-cursor"></span>
+                </span>
+            </h1>
+            <p class="text-slate-600 dark:text-slate-400 text-lg max-w-xl mx-auto md:mx-0 leading-relaxed">
+                To work for an organization to which I can provide the best of my skills and which gives me an exposure to a professional and competitive environment, enabling me to groom myself personally and professionally.
+            </p>
+            <div class="flex flex-wrap justify-center md:justify-start gap-4 pt-2">
+                <a href="#projects" class="px-6 py-3.5 bg-primary hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1 active:translate-y-0 transition-all duration-300">
+                    View Projects <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                </a>
+                <a href="VijayResume.pdf" target="_blank" class="px-6 py-3.5 bg-white dark:bg-cardDark border border-slate-300 dark:border-slate-700 hover:border-primary rounded-xl font-semibold hover:-translate-y-1 active:translate-y-0 transition-all duration-300 shadow-sm">
+                    <i class="fas fa-download mr-2 text-primary"></i>Resume
+                </a>
+            </div>
+            <!-- Social Links -->
+            <div class="flex justify-center md:justify-start space-x-5 pt-4 text-xl text-slate-500 dark:text-slate-400">
+                <a href="https://www.linkedin.com/in/vijay-manjhi-6b103b331" target="_blank" rel="noopener noreferrer" class="hover:text-primary hover:-translate-y-1 transition-transform duration-200" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/vijay_____2025?utm_source=ig_web_button_share_sheet&avpt=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="hover:text-pink-500 hover:-translate-y-1 transition-transform duration-200" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="mailto:manjhivijay8221@gmail.com" class="hover:text-primary hover:-translate-y-1 transition-transform duration-200" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="tel:+919110988221" class="hover:text-primary hover:-translate-y-1 transition-transform duration-200" title="Phone"><i class="fas fa-phone"></i></a>
+            </div>
+        </div>
+
+        <!-- Modern Animated Rounded-Square Profile Frame -->
+        <div class="md:w-2/5 flex justify-center mt-6 md:mt-0" data-aos="zoom-in" data-aos-duration="900">
+            <div class="relative group animate-float">
+                <div class="absolute -inset-2 bg-gradient-to-r from-blue-600 via-cyan-400 to-indigo-600 rounded-3xl blur-lg opacity-60 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
+                <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-cyan-400 rounded-3xl rotate-6 group-hover:rotate-3 transition-transform duration-500 opacity-80"></div>
+                <div class="relative w-64 h-72 md:w-72 md:h-80 rounded-3xl p-1.5 bg-white dark:bg-cardDark shadow-2xl overflow-hidden z-10 -rotate-2 group-hover:rotate-0 transition-transform duration-500">
+                    <img src="vijay1.jpeg"
+                         alt="Vijay Kumar"
+                         class="w-full h-full object-cover object-top rounded-2xl transform group-hover:scale-105 transition duration-500 ease-out">
+                </div>
+                <div class="absolute -top-3 -left-3 z-20 px-3 py-1.5 rounded-xl bg-white dark:bg-cardDark shadow-lg border border-slate-200 dark:border-slate-700 flex items-center gap-1.5 text-primary font-mono text-xs font-bold animate-bounce" style="animation-duration: 3s;">
+                    <i class="fas fa-code"></i> CSE
+                </div>
+                <div class="absolute -bottom-3 -right-2 z-20 bg-white dark:bg-cardDark px-3.5 py-1.5 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                    <span class="text-xs font-semibold text-slate-700 dark:text-slate-200">Open to Work</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-white/70 dark:bg-slate-900/50 backdrop-blur-sm border-y border-slate-200 dark:border-slate-800 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="700">
+                <span class="px-3.5 py-1 text-xs font-semibold bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 rounded-full">Core Competencies</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold mt-3">Technical Stack</h2>
+                <p class="text-slate-500 dark:text-slate-400 mt-2">Programming, full-stack web, data analytics & tools from resume</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Languages & Core -->
+                <div data-aos="fade-up" data-aos-delay="100" data-aos-duration="750" class="motion-card group p-6 bg-slate-50 dark:bg-cardDark rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary dark:hover:border-primary hover:shadow-xl hover:shadow-blue-500/10">
+                    <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-primary flex items-center justify-center text-xl mb-4 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                        <i class="fas fa-terminal"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-4">Languages & Databases</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">C</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">C++</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">Python</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">Java</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">JavaScript</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">SQL</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">MySQL</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">MongoDB</span>
+                    </div>
+                </div>
+
+                <!-- Web Development -->
+                <div data-aos="fade-up" data-aos-delay="220" data-aos-duration="750" class="motion-card group p-6 bg-slate-50 dark:bg-cardDark rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary dark:hover:border-primary hover:shadow-xl hover:shadow-blue-500/10">
+                    <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-primary flex items-center justify-center text-xl mb-4 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-4">Web & MERN Stack</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">HTML</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">CSS</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">React</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">Node.js</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">Express.js</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">MongoDB Atlas</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">Render</span>
+                    </div>
+                </div>
+
+                <!-- Data Analytics & Tools -->
+                <div data-aos="fade-up" data-aos-delay="340" data-aos-duration="750" class="motion-card group p-6 bg-slate-50 dark:bg-cardDark rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-primary dark:hover:border-primary hover:shadow-xl hover:shadow-blue-500/10">
+                    <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-primary flex items-center justify-center text-xl mb-4 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-4">Data, Visualization & Tools</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">Pandas</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">NumPy</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">Scikit-learn</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">Matplotlib & Seaborn</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">Tableau & Power BI</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">ggplot2 & Plotly</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">Excel</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">Hypothesis Testing</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">Regression & Time Series</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">Git</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">Jupyter & RStudio</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">VS Code & npm</span>
+                        <span class="skill-chip px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-primary rounded-lg text-sm font-medium">Google Analytics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Animated Stats Counter -->
+    <section class="py-12 px-6 max-w-6xl mx-auto" data-aos="fade-up" data-aos-duration="750">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div class="motion-card p-6 rounded-2xl bg-white dark:bg-cardDark border border-slate-200 dark:border-slate-800 text-center shadow-sm hover:border-primary">
+                <div class="font-display text-3xl md:text-4xl font-extrabold text-primary counter" data-target="7.2" data-decimals="1">0</div>
+                <p class="text-xs md:text-sm font-medium text-slate-500 dark:text-slate-400 mt-1">B.Tech GPA (out of 10)</p>
+            </div>
+
+            <div class="motion-card p-6 rounded-2xl bg-white dark:bg-cardDark border border-slate-200 dark:border-slate-800 text-center shadow-sm hover:border-primary">
+                <div class="font-display text-3xl md:text-4xl font-extrabold text-primary counter" data-target="6" data-suffix="+">0</div>
+                <p class="text-xs md:text-sm font-medium text-slate-500 dark:text-slate-400 mt-1">Programming Languages</p>
+            </div>
+
+            <div class="motion-card p-6 rounded-2xl bg-white dark:bg-cardDark border border-slate-200 dark:border-slate-800 text-center shadow-sm hover:border-primary">
+                <div class="font-display text-3xl md:text-4xl font-extrabold text-primary counter" data-target="3" data-suffix="+">0</div>
+                <p class="text-xs md:text-sm font-medium text-slate-500 dark:text-slate-400 mt-1">Certifications & SIH</p>
+            </div>
+
+            <div class="motion-card p-6 rounded-2xl bg-white dark:bg-cardDark border border-slate-200 dark:border-slate-800 text-center shadow-sm hover:border-primary">
+                <div class="font-display text-3xl md:text-4xl font-extrabold text-primary counter" data-target="2" data-suffix="+">0</div>
+                <p class="text-xs md:text-sm font-medium text-slate-500 dark:text-slate-400 mt-1">Core Full-Stack Modules</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section with Category Filters & Detail Modal Trigger -->
+    <section id="projects" class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-8" data-aos="fade-up" data-aos-duration="700">
+            <span class="px-3.5 py-1 text-xs font-semibold bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 rounded-full">Portfolio Showcase</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold mt-3">Featured Projects</h2>
+            <p class="text-slate-500 dark:text-slate-400 mt-2">Click any card to view details • Filter by domain</p>
+        </div>
+
+        <!-- Category Filter Buttons -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12" data-aos="fade-up" data-aos-delay="100" data-aos-duration="700">
+            <button onclick="filterProjects('all', this)" class="filter-btn active px-5 py-2 rounded-full text-sm font-semibold bg-primary text-white shadow-md shadow-blue-500/25 transition">
+                All Projects
+            </button>
+            <button onclick="filterProjects('web', this)" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-white dark:bg-cardDark text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-primary transition">
+                MERN & Web
+            </button>
+            <button onclick="filterProjects('data', this)" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-white dark:bg-cardDark text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-primary transition">
+                Data & Analytics
+            </button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+            <!-- Project Card 1 -->
+<div data-category="web"
+     data-aos="fade-up"
+     data-aos-delay="100"
+     data-aos-duration="750"
+     onclick="openProjectModal('Bike / Rent Management System', 'MERN Stack Application', 'Developed a full-stack rent management system using the MERN stack for seamless rental operations.', ['MongoDB', 'Express.js', 'React', 'Node.js'], 'https://bike-rental-with-live-tracking.onrender.com/',)"
+     class="motion-card project-card cursor-pointer group bg-white dark:bg-cardDark rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary dark:hover:border-primary shadow-sm hover:shadow-2xl hover:shadow-blue-500/15 flex flex-col justify-between">
+    <div class="p-6">
+        <div class="flex justify-between items-center mb-5">
+            <div class="p-3 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                <i class="fas fa-motorcycle text-xl"></i>
+            </div>
+            <div class="flex items-center gap-3 text-xs font-semibold">
+                <a href="https://bike-rental-with-live-tracking.onrender.com/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   onclick="event.stopPropagation()"
+                   class="text-primary hover:underline flex items-center gap-1">
+                    Live <i class="fas fa-external-link-alt text-[11px]"></i>
+                </a>
+                <span class="text-slate-500 group-hover:translate-x-1 transition-transform">Details <i class="fas fa-arrow-right ml-0.5"></i></span>
+            </div>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Bike / Rent Management System</h3>
+        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 leading-relaxed">
+            Developed a full-stack rent management system using the MERN stack for seamless rental operations.
+        </p>
+    </div>
+    <div class="px-6 pb-6 flex flex-wrap gap-2 text-xs font-mono font-semibold text-primary">
+        <span class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-md">MongoDB</span>
+        <span class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-md">Express.js</span>
+        <span class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-md">React</span>
+        <span class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-md">Node.js</span>
+    </div>
+</div>
+
+            <!-- Project Card 2 -->
+            <div data-category="web" data-aos="fade-up" data-aos-delay="220" data-aos-duration="750" onclick="openProjectModal('Auth & Role Dashboards', 'Full-Stack Security & UI', 'Implemented user registration, authentication, and dedicated admin/user dashboards built and deployed with modern developer tools.', ['VS Code', 'Git', 'npm', 'MongoDB Atlas', 'Render'])" class="motion-card project-card cursor-pointer group bg-white dark:bg-cardDark rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary dark:hover:border-primary shadow-sm hover:shadow-2xl hover:shadow-blue-500/15 flex flex-col justify-between">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-5">
+                        <div class="p-3 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                            <i class="fas fa-user-shield text-xl"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-primary group-hover:translate-x-1 transition-transform">Details <i class="fas fa-arrow-right ml-1"></i></span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Auth & Role Dashboards</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 leading-relaxed">
+                        Implemented user registration, authentication, and dedicated admin/user dashboards with cloud deployment.
+                    </p>
+                </div>
+                <div class="px-6 pb-6 flex flex-wrap gap-2 text-xs font-mono font-semibold text-primary">
+                    <span class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-md">VS Code</span>
+                    <span class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-md">Git</span>
+                    <span class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-md">MongoDB Atlas</span>
+                    <span class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-md">Render</span>
+                </div>
+            </div>
+
+            <!-- Project Card 3 -->
+            <div data-category="data" data-aos="fade-up" data-aos-delay="340" data-aos-duration="750" onclick="openProjectModal('Data Analysis & Visualization', 'Analytics & BI Suite', 'Applied hypothesis testing, regression, and time series analysis alongside interactive dashboards and visual reporting.', ['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'Tableau', 'Power BI'])" class="motion-card project-card cursor-pointer group bg-white dark:bg-cardDark rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-primary dark:hover:border-primary shadow-sm hover:shadow-2xl hover:shadow-blue-500/15 flex flex-col justify-between">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-5">
+                        <div class="p-3 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                            <i class="fas fa-chart-line text-xl"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-primary group-hover:translate-x-1 transition-transform">Details <i class="fas fa-arrow-right ml-1"></i></span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors">Data Analysis & Visualization</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 leading-relaxed">
+                        Statistical analysis including hypothesis testing, regression, and time series using Python, R, and BI tools.
+                    </p>
+                </div>
+                <div class="px-6 pb-6 flex flex-wrap gap-2 text-xs font-mono font-semibold text-primary">
+                    <span class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-md">Python</span>
+                    <span class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-md">Tableau</span>
+                    <span class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-md">Power BI</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- About Section with Education -->
+<section id="about" class="py-20 px-6 max-w-6xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up">
+        <span class="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-50 text-primary dark:bg-blue-900/30">
+            About Me
+        </span>
+        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3 tracking-tight">
+            About Vijay Kumar
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-2">
+            Computer Science &amp; Engineering student focused on full-stack web development, problem solving, and data analytics.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Left Column: Bio + Education Card -->
+        <div class="lg:col-span-7 space-y-6" data-aos="fade-up">
+            <div class="space-y-4 text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                <p>
+                    I am a <strong class="text-slate-900 dark:text-white">B.Tech Computer Science and Engineering</strong> undergraduate at <strong class="text-slate-900 dark:text-white">VFSTR</strong>, building clean, responsive web applications and analytical projects.
+                </p>
+                <p>
+                    I work primarily with the <strong class="text-slate-900 dark:text-white">MERN Stack</strong>, <strong class="text-slate-900 dark:text-white">Python</strong>, and <strong class="text-slate-900 dark:text-white">SQL</strong>, turning ideas into practical, user-friendly software solutions.
+                </p>
+            </div>
+
+            <!-- Education Highlight Box -->
+            <div class="motion-card rounded-2xl bg-white dark:bg-cardDark border border-slate-200/80 dark:border-slate-800 p-5 sm:p-6 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-primary">Education</span>
+                    <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                        B.Tech • CSE
+                    </span>
+                </div>
+                <h3 class="font-display text-lg font-bold text-slate-900 dark:text-white">
+                    Bachelor of Technology in Computer Science &amp; Engineering
+                </h3>
+                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                    VFSTR (Vignan's Foundation for Science, Technology &amp; Research)
+                </p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">
+                    Core Areas: Data Structures &amp; Algorithms, Web Technologies, Database Management Systems (SQL/NoSQL), and Data Analytics.
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Column: Quick Highlights -->
+        <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="motion-card rounded-2xl bg-white dark:bg-cardDark border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm">
+                <p class="text-xs font-bold uppercase tracking-wider text-primary">Core Stack</p>
+                <p class="font-display font-bold text-slate-900 dark:text-white mt-1">MERN, Python &amp; SQL</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Full-stack apps, APIs &amp; structured data</p>
+            </div>
+
+            <div class="motion-card rounded-2xl bg-white dark:bg-cardDark border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm">
+                <p class="text-xs font-bold uppercase tracking-wider text-primary">Focus Areas</p>
+                <p class="font-display font-bold text-slate-900 dark:text-white mt-1">Web Engineering &amp; Analytics</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Modern UI, backend logic &amp; insights</p>
+            </div>
+
+            <div class="motion-card rounded-2xl bg-white dark:bg-cardDark border border-slate-200/80 dark:border-slate-800 p-5 shadow-sm sm:col-span-2 lg:col-span-1">
+                <p class="text-xs font-bold uppercase tracking-wider text-primary">University</p>
+                <p class="font-display font-bold text-slate-900 dark:text-white mt-1">VFSTR</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Computer Science &amp; Engineering</p>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Interactive Working Contact Section -->
+    <section id="contact" class="py-20 px-6 max-w-4xl mx-auto" data-aos="fade-up" data-aos-duration="750">
+        <div class="text-center mb-12">
+            <span class="px-3.5 py-1 text-xs font-semibold bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 rounded-full">
+                Contact Me
+            </span>
+            <h2 class="text-3xl md:text-4xl font-extrabold mt-3">Let's Work Together</h2>
+            <p class="text-slate-600 dark:text-slate-400 mt-2 max-w-lg mx-auto">
+                Have a project in mind or looking to hire a Software Engineer? Send a direct message below.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-8 bg-white dark:bg-cardDark p-6 md:p-10 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl">
+            <!-- Left Info Column -->
+            <div class="md:col-span-2 flex flex-col justify-between space-y-6 border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-800 pb-6 md:pb-0 md:pr-6">
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold">Contact Details</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">
+                        Reach out to Vijay Kumar for software engineering opportunities or collaborations.
+                    </p>
+                    <div class="space-y-3 pt-2 text-sm">
+                        <div class="flex items-center justify-between gap-2 text-slate-700 dark:text-slate-300">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div class="w-9 h-9 shrink-0 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-primary flex items-center justify-center">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <span class="truncate">manjhivijay8221@gmail.com</span>
+                            </div>
+                            <button type="button" onclick="copyText('manjhivijay8221@gmail.com', 'Email copied!')" class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 hover:text-primary transition" title="Copy Email">
+                                <i class="far fa-copy"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex items-center justify-between gap-2 text-slate-700 dark:text-slate-300">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 shrink-0 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-primary flex items-center justify-center">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <span>+91-9110988221</span>
+                            </div>
+                            <button type="button" onclick="copyText('+91-9110988221', 'Phone number copied!')" class="text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 hover:text-primary transition" title="Copy Phone">
+                                <i class="far fa-copy"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex items-center gap-3 text-slate-700 dark:text-slate-300">
+                            <div class="w-9 h-9 shrink-0 rounded-lg bg-pink-50 dark:bg-pink-900/20 text-pink-500 flex items-center justify-center">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <a href="https://www.instagram.com/vijay_____2025?utm_source=ig_web_button_share_sheet&avpt=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="hover:text-pink-500 transition truncate">
+                                @vijay_____2025
+                            </a>
+                        </div>
+
+                        <div class="flex items-center gap-3 text-slate-700 dark:text-slate-300">
+                            <div class="w-9 h-9 shrink-0 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-primary flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <span>Chhapra / VFSTR, India</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="flex space-x-3 pt-4">
+                    <a href="https://www.linkedin.com/in/vijay-manjhi-6b103b331" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/vijay_____2025?utm_source=ig_web_button_share_sheet&avpt=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-pink-500 hover:text-white flex items-center justify-center transition" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="mailto:manjhivijay8221@gmail.com" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition" title="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="tel:+919110988221" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-primary hover:text-white flex items-center justify-center transition" title="Call"><i class="fas fa-phone"></i></a>
+                </div>
+            </div>
+
+            <!-- Right Working Form Column -->
+            <div class="md:col-span-3">
+                <form id="contact-form" class="space-y-4">
+                    <input type="hidden" name="access_key" value="972fff75-2c2f-4f2c-b409-b94c4c4873d7">
+                    <input type="hidden" name="subject" value="New Portfolio Inquiry for Vijay Kumar Manjhi">
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Your Name</label>
+                            <input type="text" name="name" required placeholder="Rahul Sharma"
+                                   class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-blue-500/20 outline-none text-sm transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Email Address</label>
+                            <input type="email" name="email" required placeholder="rahul@company.com"
+                                   class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-blue-500/20 outline-none text-sm transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Message</label>
+                        <textarea name="message" rows="4" required placeholder="Hi Vijay, we would love to discuss an opportunity..."
+                                  class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-blue-500/20 outline-none text-sm transition resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" id="submit-btn"
+                            class="w-full py-3.5 bg-primary hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all duration-300 flex items-center justify-center gap-2">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane text-xs"></i>
+                    </button>
+
+                    <div id="form-result" class="hidden text-center text-sm font-semibold py-2.5 px-4 rounded-xl"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Detail Modal -->
+    <div id="project-modal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/60 backdrop-blur-sm px-4" onclick="closeProjectModal(event)">
+        <div class="w-full max-w-lg rounded-3xl bg-white dark:bg-cardDark border border-slate-200 dark:border-slate-800 p-6 md:p-8 shadow-2xl space-y-5">
+            <div class="flex items-start justify-between gap-4">
+                <div>
+                    <span id="modal-subtitle" class="text-xs font-bold uppercase tracking-wider text-primary"></span>
+                    <h3 id="modal-title" class="text-2xl font-extrabold mt-1"></h3>
+                </div>
+                <button type="button" onclick="closeProjectModal(null, true)" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 hover:text-primary flex items-center justify-center">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <p id="modal-desc" class="text-sm md:text-base text-slate-600 dark:text-slate-300 leading-relaxed"></p>
+            <div id="modal-tags" class="flex flex-wrap gap-2 pt-1"></div>
+            <div id="modal-links" class="flex flex-wrap gap-3 pt-2"></div>
+        </div>
+    </div>
+
+    <!-- Back To Top Button -->
+    <button id="back-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="fixed bottom-6 right-6 z-40 hidden w-11 h-11 rounded-full bg-primary text-white shadow-lg shadow-blue-500/30 hover:bg-blue-700 items-center justify-center transition transform hover:-translate-y-1" title="Back to top">
+        <i class="fas fa-arrow-up text-sm"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center border-t border-slate-200 dark:border-slate-800 text-xs text-slate-500">
+        © 2026 Vijay Kumar. All rights reserved.
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

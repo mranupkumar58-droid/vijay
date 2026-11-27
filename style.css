@@ -1,0 +1,292 @@
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 84px;
+}
+
+h1, h2, h3, h4, .font-display {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: -0.02em;
+}
+
+[data-aos] {
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+
+/* 2. Page Mesh Gradient Background (Light & Dark) */
+section,
+section > div,
+#skills,
+#about,
+#projects,
+#contact {
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+body {
+    background-color: #eef4ff !important;
+    background-image:
+        radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.24) 0%, transparent 46%),
+        radial-gradient(circle at 86% 22%, rgba(99, 102, 241, 0.22) 0%, transparent 46%),
+        radial-gradient(circle at 25% 78%, rgba(59, 130, 246, 0.20) 0%, transparent 48%),
+        radial-gradient(circle at 82% 80%, rgba(45, 212, 191, 0.18) 0%, transparent 46%),
+        linear-gradient(135deg, #f5f9ff 0%, #eaf2ff 52%, #f1f6ff 100%) !important;
+    background-attachment: fixed !important;
+}
+
+body.dark,
+.dark body {
+    background-color: #070d1b !important;
+    background-image:
+        radial-gradient(circle at 15% 18%, rgba(37, 99, 235, 0.24) 0%, transparent 48%),
+        radial-gradient(circle at 85% 22%, rgba(14, 165, 233, 0.18) 0%, transparent 46%),
+        radial-gradient(circle at 50% 85%, rgba(99, 102, 241, 0.18) 0%, transparent 50%),
+        linear-gradient(180deg, #070d1b 0%, #0b1326 60%, #070d1b 100%) !important;
+    background-attachment: fixed !important;
+}
+
+/* =========================================================
+   3. Scroll-Triggered Frosted Navbar
+   ========================================================= */
+nav,
+nav.nav-transparent {
+    background: transparent !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: 1px solid transparent !important;
+    box-shadow: none !important;
+    transition: background-color 0.28s ease,
+                backdrop-filter 0.28s ease,
+                border-color 0.28s ease,
+                box-shadow 0.28s ease !important;
+}
+
+nav.nav-scrolled {
+    background: rgba(255, 255, 255, 0.72) !important;
+    backdrop-filter: blur(16px) saturate(170%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(170%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.75) !important;
+    box-shadow: 0 8px 24px -8px rgba(15, 23, 42, 0.10) !important;
+}
+
+body.dark nav.nav-scrolled,
+.dark nav.nav-scrolled {
+    background: rgba(10, 15, 28, 0.78) !important;
+    backdrop-filter: blur(16px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.16) !important;
+    box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* 4. Liquid Glass Cards & Cursor Spotlight */
+.motion-card,
+.project-card,
+#skills .rounded-2xl,
+#skills .rounded-3xl,
+#about .rounded-2xl,
+#about .rounded-3xl,
+#projects .rounded-2xl,
+#projects .rounded-3xl,
+#contact .rounded-2xl,
+#contact .rounded-3xl {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.36) !important;
+    backdrop-filter: blur(14px) saturate(175%) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(175%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.82) !important;
+    box-shadow:
+        0 14px 34px -10px rgba(15, 23, 42, 0.12),
+        inset 0 1px 1.5px rgba(255, 255, 255, 0.95) !important;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.25s ease;
+}
+
+.motion-card:hover {
+    transform: translateY(-7px);
+}
+
+.motion-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(37, 99, 235, 0.12),
+        transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.motion-card:hover::before {
+    opacity: 1;
+}
+
+/* Dark Mode Cards & Crisp Readable Text */
+body.dark .motion-card,
+body.dark .project-card,
+.dark .motion-card,
+.dark .project-card,
+body.dark #skills .rounded-2xl,
+body.dark #skills .rounded-3xl,
+body.dark #about .rounded-2xl,
+body.dark #about .rounded-3xl,
+body.dark #projects .rounded-2xl,
+body.dark #projects .rounded-3xl,
+body.dark #contact .rounded-2xl,
+body.dark #contact .rounded-3xl {
+    background: rgba(11, 19, 38, 0.74) !important;
+    border: 1px solid rgba(148, 163, 184, 0.22) !important;
+    box-shadow:
+        0 16px 36px -12px rgba(0, 0, 0, 0.60),
+        inset 0 1px 1px rgba(255, 255, 255, 0.14) !important;
+    color: #f1f5f9 !important;
+}
+
+body.dark .project-card h3,
+body.dark .motion-card h3,
+.dark .project-card h3,
+.dark .motion-card h3 {
+    color: #ffffff !important;
+}
+
+body.dark .project-card p,
+body.dark .motion-card p,
+.dark .project-card p,
+.dark .motion-card p {
+    color: #cbd5e1 !important;
+}
+
+/* 5. Skill Chips & Badges */
+.skill-chip {
+    background: rgba(255, 255, 255, 0.55) !important;
+    border: 1px solid rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.22s ease,
+                border-color 0.2s ease,
+                color 0.2s ease;
+}
+
+.skill-chip:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 8px 18px -6px rgba(37, 99, 235, 0.28);
+}
+
+body.dark .project-card span,
+body.dark .project-card a,
+body.dark .skill-chip,
+.dark .project-card span,
+.dark .project-card a,
+.dark .skill-chip {
+    background: rgba(30, 41, 59, 0.78) !important;
+    color: #e2e8f0 !important;
+    border-color: rgba(148, 163, 184, 0.22) !important;
+}
+
+/* 6. Animations & Effects */
+.animate-gradient-text {
+    background: linear-gradient(to right, #2563eb, #06b6d4, #4f46e5, #2563eb);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4.5s linear infinite;
+}
+
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+
+.preloader-card-exit {
+    opacity: 0;
+    transform: scale(1.06);
+    pointer-events: none;
+}
+
+@keyframes projectReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.97);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.project-reveal {
+    animation: projectReveal 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes siteShake {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+    15% { transform: translate3d(-10px, 4px, 0) rotate(-1.2deg); }
+    30% { transform: translate3d(10px, -4px, 0) rotate(1.2deg); }
+    45% { transform: translate3d(-8px, -2px, 0) rotate(-0.8deg); }
+    60% { transform: translate3d(8px, 3px, 0) rotate(0.8deg); }
+    75% { transform: translate3d(-4px, 1px, 0) rotate(-0.4deg); }
+}
+
+.shake-page {
+    animation: siteShake 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    will-change: transform;
+}
+
+/* 7. Mobile Smooth Scroll Optimization */
+@media (max-width: 768px) {
+    body,
+    body.dark,
+    .dark body {
+        background-attachment: scroll !important;
+    }
+
+    .motion-card,
+    .project-card,
+    #skills .rounded-2xl,
+    #skills .rounded-3xl,
+    #about .rounded-2xl,
+    #about .rounded-3xl,
+    #projects .rounded-2xl,
+    #projects .rounded-3xl,
+    #contact .rounded-2xl,
+    #contact .rounded-3xl,
+    .skill-chip {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        will-change: auto !important;
+        transform: none !important;
+        background: rgba(255, 255, 255, 0.76) !important;
+    }
+
+    body.dark .motion-card,
+    body.dark .project-card,
+    .dark .motion-card,
+    .dark .project-card,
+    body.dark #skills .rounded-2xl,
+    body.dark #skills .rounded-3xl,
+    body.dark #about .rounded-2xl,
+    body.dark #about .rounded-3xl,
+    body.dark #projects .rounded-2xl,
+    body.dark #projects .rounded-3xl,
+    body.dark #contact .rounded-2xl,
+    body.dark #contact .rounded-3xl,
+    body.dark .skill-chip,
+    .dark .skill-chip {
+        background: rgba(11, 19, 38, 0.86) !important;
+    }
+
+    nav.nav-scrolled {
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+    }
+}
